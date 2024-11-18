@@ -6,6 +6,26 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <header>
+        <h1>to-do list</h1>
+    </header>
+    <div class="main-container">
+        <button id="create-project">create new project</button>
+        <button id="clear-projects">clear all projects</button>
+
+        <dialog id="my-dialog">
+            <form method="dialog" id="project-form">
+                <label for="name">Project name:</label>
+                <input type="text" name="name" id="project-name">
+                <div id="project-buttons">
+                    <button type="submit">create</button>
+                    <button type="button" id="close-button">close</button>
+                </div>
+            </form>
+        </dialog>
+        <div id="content">
+
+        </div>
+    </div>
 </body>
 </html>
