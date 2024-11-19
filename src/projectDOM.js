@@ -4,10 +4,12 @@ export const renderProject = (project, container) => {
     projectDiv.textContent = project.name;
     projectDiv.classList.add('projects');
 
+    // add todo button to rendered project
     const addToDoButton = document.createElement('button');
     addToDoButton.textContent = 'Add todo';
     addToDoButton.classList.add('add-todo');
-
+    // set a projectName property on button to determine which add todo button was pressed.
+    addToDoButton.dataset.projectName = project.name;
     projectDiv.appendChild(addToDoButton);
     container.appendChild(projectDiv);
 }

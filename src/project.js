@@ -2,7 +2,6 @@
 Factory function used to create projects. Projects will have a name and a
 list of todo objects.
 */
-
 function createProject(name) {
     let toDoList = [];
 
