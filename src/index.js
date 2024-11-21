@@ -34,8 +34,11 @@ document.addEventListener('DOMContentLoaded', () => {
         event.target.reset();
     });
 
-  
-    document.getElementById('clear-projects').addEventListener('click', () => clearProjects(content));
+    // clear projects div & array
+    document.getElementById('clear-projects').addEventListener('click', () => {
+        clearProjects(container);
+        projectList.splice(0, projectList.length);
+    });
     // state to track active project
     let currentProject = null;
 
@@ -81,6 +84,5 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.getElementById('cancel-todo').addEventListener('click', () => todoDialog.close());
-
-     
+  
 });
