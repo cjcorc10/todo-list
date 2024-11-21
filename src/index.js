@@ -2,10 +2,11 @@ import "./styles.css";
 import { createToDo } from "./todo";
 import { createProject } from "./project";
 import { renderProject, clearProjects } from "./projectDOM";
+import { renderToDo } from "./todoDOM";
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // open and close the dialog element
+    // open and close the new project dialog element
     const openDialog = document.getElementById('create-project');
     const dialog = document.getElementById('my-dialog');
     const closeButton = document.querySelector('#close-button');
@@ -33,13 +34,16 @@ document.addEventListener('DOMContentLoaded', () => {
         event.target.reset();
     });
 
-    // add task to todo list of project
+  
     document.getElementById('clear-projects').addEventListener('click', () => clearProjects(content));
     // state to track active project
     let currentProject = null;
 
+
     const todoDialog = document.getElementById('todo-dialog');
+    // event delegation for new DOM elements
     container.addEventListener('click', (event) => {
+        // add a todo task to project
         if (event.target.classList.contains('add-todo')) {
             const projectName = event.target.dataset.projectName;
 
@@ -49,8 +53,17 @@ document.addEventListener('DOMContentLoaded', () => {
             if (currentProject) 
                 todoDialog.showModal();
         }
+
+        // remove todo task from project
+        if (event.target.id === 'remove-todo') {
+            const taskName = event.target.dataset.taskName;
+            currentProject.removeListItem(taskName);
+            console.log(currentProject.getList());
+            renderToDo(currentProject);
+        }
     });
 
+    // form for creating todo tasks
     document.getElementById('todo-form').addEventListener('submit', (event) => {
         event.preventDefault();
 
@@ -62,12 +75,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const newTask = createToDo(title, description, dueBy, priority);
         currentProject.addListItem(newTask);
 
+        renderToDo(currentProject);
         todoDialog.close();
         event.target.reset();
     });
 
     document.getElementById('cancel-todo').addEventListener('click', () => todoDialog.close());
-
 
      
 });

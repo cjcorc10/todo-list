@@ -7,11 +7,15 @@ function createProject(name) {
 
     const addListItem = (toDoItem) => toDoList.push(toDoItem);
     
-    const removeListItem = (index) => {
-        toDoList.splice(index, 1);
+    const removeListItem = (taskName) => {
+        for (let i=0; i < toDoList.length; i++) {
+            if(toDoList[i].title === taskName)
+                toDoList.splice(i, 1);
+        }
     }
 
     const getList = () => [...toDoList];
+
 
     return { name, addListItem, removeListItem, getList };
 }
