@@ -6,13 +6,32 @@ export const renderToDo = (project) => {
     todoContainer.textContent = '';
 
     // fill div with all of the todo tasks
-    for(let i=0; i < project.getList().length; i++) {
+    const projectList = project.getList();
+    projectList.forEach((todo, index) => {
         const toDoDiv = document.createElement('div');
         toDoDiv.innerHTML = `
-        <h3>${project.getList()[i].title}</h3>
-        <p>${project.getList()[i].dueDate}<p>
-        <button>expand</button>
-        <button id="remove-todo" data-task-name="${project.getList()[i].title}">Remove task</button>`
+        <h3>${todo.title}</h3>
+        <p>${todo.dueDate}</p>
+        <div class="properties" style="display: none">
+            <p>${todo.description}</p>
+            <p>${todo.priority}</p>
+        </div>
+        <div class="todo-buttons">
+            <button class="expand-prop">expand</button>
+            <button class="remove-todo" data-task-name="${todo.title}">Remove task</button>
+        </div>`;
         todoContainer.appendChild(toDoDiv);
-    }
+    });
+
+
 }  
+
+// function to show other todo properties
+export const toggleProps = (event) => {
+    const propertyNode = event.target.parentElement.previousElementSibling;
+
+    // toggle the hidden div node
+    const isVisible = propertyNode.style.display === "block";
+    propertyNode.style.display = isVisible ? "none" : "block"
+    event.target.textContent = isVisible ? "view more": "view less";
+}

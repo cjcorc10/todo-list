@@ -2,11 +2,11 @@ import "./styles.css";
 import { createToDo } from "./todo";
 import { createProject } from "./project";
 import { renderProject, clearProjects } from "./projectDOM";
-import { renderToDo } from "./todoDOM";
+import { renderToDo, toggleProps } from "./todoDOM";
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // open and close the new project dialog element
+    // project dialog DOM nodes 
     const openDialog = document.getElementById('create-project');
     const dialog = document.getElementById('my-dialog');
     const closeButton = document.querySelector('#close-button');
@@ -18,20 +18,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // handling creating and deleting projects
     const container = document.getElementById('content'); 
 
+    // global array to hold projects
     const projectList = [];
     const projectForm = document.getElementById('project-form');
 
     projectForm.addEventListener('submit', (event) => {
-        event.preventDefault();
-
-        const name = document.getElementById('project-name').value;   
-    
-        const newProject = createProject(name);
-        projectList.push(newProject);
-
-        dialog.close();
-        renderProject(newProject, container);
-        event.target.reset();
+        handleAddProject(event);
     });
 
     // clear projects div & array
@@ -39,30 +31,26 @@ document.addEventListener('DOMContentLoaded', () => {
         clearProjects(container);
         projectList.splice(0, projectList.length);
     });
-    // state to track active project
+
+
+    // global variable used to hold state of active project
     let currentProject = null;
-
-
     const todoDialog = document.getElementById('todo-dialog');
+
     // event delegation for new DOM elements
     container.addEventListener('click', (event) => {
-        // add a todo task to project
+        // handle add-todo button press
         if (event.target.classList.contains('add-todo')) {
-            const projectName = event.target.dataset.projectName;
-
-            // use find method to find the project to add the task to
-            currentProject = projectList.find((project) => project.name === projectName);
-
-            if (currentProject) 
-                todoDialog.showModal();
+            handleAddToDo(event) 
         }
 
         // remove todo task from project
-        if (event.target.id === 'remove-todo') {
-            const taskName = event.target.dataset.taskName;
-            currentProject.removeListItem(taskName);
-            console.log(currentProject.getList());
-            renderToDo(currentProject);
+        if (event.target.classList.contains('remove-todo')) {
+            handleRemoveToDo(event);
+        }
+
+        if (event.target.classList.contains('expand-prop')) {
+            toggleProps(event);
         }
     });
 
@@ -85,4 +73,50 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('cancel-todo').addEventListener('click', () => todoDialog.close());
   
+
+
+    /*
+    FUNCTION DECLARATIONS
+    */
+    function handleAddProject(event) {
+        event.preventDefault();
+
+        const name = document.getElementById('project-name').value;   
+    
+        const newProject = createProject(name);
+        projectList.push(newProject);
+
+        dialog.close();
+        renderProject(newProject, container);
+        event.target.reset();
+    }
+
+    // add todo objects to project list 
+    function handleAddToDo(event) {
+        const projectName = event.target.dataset.projectName;
+    
+        // use find method to find the project to add the task to
+        currentProject = projectList.find((project) => project.name === projectName);
+    
+        if (currentProject) 
+            todoDialog.showModal();
+        
+    }
+
+
+    function handleRemoveToDo(event) {
+        const taskName = event.target.dataset.taskName;
+        const projectName = event.target.closest('[data-project-name]').dataset.projectName;
+        const project = projectList.find((proj) => proj.name === projectName);
+
+        if (project) {
+            // remove the task from the project
+            project.removeListItem(taskName);
+        
+            // re-render project
+            renderToDo(project);
+        }
+    }
+
 });
+
