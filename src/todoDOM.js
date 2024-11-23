@@ -13,8 +13,8 @@ export const renderToDo = (project) => {
         <h3>${todo.title}</h3>
         <p>${todo.dueDate}</p>
         <div class="properties" style="display: none">
-            <p>${todo.description}</p>
-            <p>${todo.priority}</p>
+            <p>description: ${todo.description}</p>
+            <p>priority: ${todo.priority}</p>
         </div>
         <div class="todo-buttons">
             <button class="expand-prop">expand</button>

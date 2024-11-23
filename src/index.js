@@ -35,6 +35,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // global variable used to hold state of active project
     let currentProject = null;
+
+
     const todoDialog = document.getElementById('todo-dialog');
 
     // event delegation for new DOM elements
@@ -43,6 +45,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (event.target.classList.contains('add-todo')) {
             handleAddToDo(event) 
         }
+
+        if (event.target.classList.contains('remove-project')) {
+            console.log('button pressed');
+            handleRemoveProject(event);
+        }
+
 
         // remove todo task from project
         if (event.target.classList.contains('remove-todo')) {
@@ -87,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
         projectList.push(newProject);
 
         dialog.close();
-        renderProject(newProject, container);
+        renderProject(projectList);
         event.target.reset();
     }
 
@@ -100,7 +108,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
         if (currentProject) 
             todoDialog.showModal();
-        
     }
 
 
@@ -118,5 +125,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    function handleRemoveProject(event) {
+        const projectName = event.target.closest('[data-project-name]').dataset.projectName;
+        currentProject = projectList.findIndex((proj) => proj.name === projectName);
+        projectList.splice(currentProject, 1);
+
+        renderProject(projectList);
+    }
 });
 
