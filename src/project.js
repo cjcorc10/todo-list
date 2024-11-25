@@ -18,7 +18,6 @@ function createProject(name) {
 
     const getListItem = (index) => toDoList[index];
 
-
     return { name, addListItem, removeListItem, getList, getListItem };
 }
 

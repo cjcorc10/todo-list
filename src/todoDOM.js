@@ -9,18 +9,20 @@ export const renderToDo = (project) => {
     const projectList = project.getList();
     projectList.forEach((todo, index) => {
         const toDoDiv = document.createElement('div');
+        toDoDiv.classList.add(`todo-div-${todo.title}`);
         toDoDiv.innerHTML = `
         <h3>${todo.title}</h3>
         <p>${todo.dueDate}</p>
         <div class="properties" style="display: none">
             <p>description: ${todo.description}</p>
             <p>priority: ${todo.priority}</p>
-            <button class="complete-button">mark complete</button>
+            <button class='completed'>mark as complete</button>
         </div>
         <div class="todo-buttons">
             <button class="expand-prop">expand</button>
             <button class="remove-todo" data-task-name="${todo.title}">Remove task</button>
         </div>`;
+        toDoDiv.classList.add('incomplete-task');
         todoContainer.appendChild(toDoDiv);
     });
 
