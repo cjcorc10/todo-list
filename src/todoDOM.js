@@ -15,6 +15,7 @@ export const renderToDo = (project) => {
         <div class="properties" style="display: none">
             <p>description: ${todo.description}</p>
             <p>priority: ${todo.priority}</p>
+            <button class="complete-button">mark complete</button>
         </div>
         <div class="todo-buttons">
             <button class="expand-prop">expand</button>

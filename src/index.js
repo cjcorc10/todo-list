@@ -2,7 +2,7 @@ import "./styles.css";
 import { createToDo } from "./todo";
 import { createProject } from "./project";
 import { renderProject, clearProjects } from "./projectDOM";
-import { renderToDo, toggleProps } from "./todoDOM";
+import { renderToDo, toggleProps, toggleComplete } from "./todoDOM";
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // global variable used to hold state of active project
     let currentProject = null;
-
+    let currentTask = null;
 
     const todoDialog = document.getElementById('todo-dialog');
 
@@ -60,6 +60,18 @@ document.addEventListener('DOMContentLoaded', () => {
         if (event.target.classList.contains('expand-prop')) {
             toggleProps(event);
         }
+
+        if (event.target.classList.contains('complete-button')) {
+            currentTask = event.target.parentElement.previousElementSibling.previousElementSibling.textContent;
+            currentProject = event.target.closest('[data-project-name]').dataset.projectName;
+
+            const proj = projectList.find((proj) => proj.name === currentProject)
+            console.log(proj);
+
+            
+            
+        }
+
     });
 
     // form for creating todo tasks
