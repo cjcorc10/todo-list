@@ -60,6 +60,20 @@ document.addEventListener('DOMContentLoaded', () => {
         if (event.target.classList.contains('expand-prop')) {
             toggleProps(event);
         }
+
+        // mark task as completed
+        if (event.target.classList.contains('completed')) {
+            // logic to get current project
+            currentProject = event.target.closest('[data-project-name]').dataset.projectName;
+            // logic to get current task
+            const currentTask = event.target.parentElement.previousElementSibling.previousElementSibling.textContent;
+            
+            // projectList[projectIndex].getList[taskIndex].markCompleted();
+            const proj = projectList.find((proj) => proj.name === currentProject);
+            const taskIndex = proj.getList().findIndex((task) => task.title === currentTask);
+            proj.getListItem(taskIndex).markComplete();
+
+        }
     });
 
     // form for creating todo tasks
@@ -86,6 +100,11 @@ document.addEventListener('DOMContentLoaded', () => {
     /*
     FUNCTION DECLARATIONS
     */
+    function renderALL(projectList) {
+        renderProject(projectList);
+        projectList.forEach((proj) => renderToDo(proj));
+    }
+
     function handleAddProject(event) {
         event.preventDefault();
 
@@ -95,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
         projectList.push(newProject);
 
         dialog.close();
-        renderProject(projectList);
+        renderALL(projectList);
         event.target.reset();
     }
 
@@ -132,5 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         renderProject(projectList);
     }
-});
 
+
+    
+});
