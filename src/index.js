@@ -2,7 +2,7 @@ import "./styles.css";
 import { createToDo } from "./todo";
 import { createProject } from "./project";
 import { renderProject, clearProjects } from "./projectDOM";
-import { renderToDo, toggleProps, toggleComplete } from "./todoDOM";
+import { renderToDo, toggleProps, handleToggleComplete } from "./todoDOM";
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -47,7 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (event.target.classList.contains('remove-project')) {
-            console.log('button pressed');
             handleRemoveProject(event);
         }
 
@@ -72,7 +71,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const proj = projectList.find((proj) => proj.name === currentProject);
             const taskIndex = proj.getList().findIndex((task) => task.title === currentTask);
             proj.getListItem(taskIndex).markComplete();
-
+            
+            handleToggleComplete(event);
         }
     });
 

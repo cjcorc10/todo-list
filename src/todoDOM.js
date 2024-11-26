@@ -38,3 +38,12 @@ export const toggleProps = (event) => {
     propertyNode.style.display = isVisible ? "none" : "block"
     event.target.textContent = isVisible ? "view more": "view less";
 }
+
+
+export const handleToggleComplete = (event) => {
+    const parentDiv = event.target.parentElement.parentElement;
+
+    const isComplete = parentDiv.classList.toggle('incomplete-task');
+    parentDiv.classList.toggle('complete-task', !isComplete);
+    event.target.textContent = !isComplete ? 'mark as incomplete' : 'mark as complete';
+}

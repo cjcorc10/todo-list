@@ -12,7 +12,7 @@ function createToDo( title, description, dueDate, priority) {
         priority,
         complete: false,
         markComplete() {
-            this.complete = true;
+            this.complete = this.complete ? false : true;
         }
     };
 }
