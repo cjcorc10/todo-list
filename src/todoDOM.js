@@ -1,5 +1,5 @@
-export const renderToDo = (project) => {
-    const projectDiv = document.querySelector(`[data-project-name="${project.name}"]`);
+export const renderToDo = (project, domMap) => {
+    const projectDiv = document.querySelector(`[data-project-id="${project.id}"]`);
     const todoContainer = projectDiv.querySelector('#todo-list');
     
     // clear current div
@@ -8,8 +8,17 @@ export const renderToDo = (project) => {
     // fill div with all of the todo tasks
     const projectList = project.getList();
     projectList.forEach((todo, index) => {
+
+        const existingNode = domMap.get(todo);
+        if (existingNode) {
+            existingNode.remove();
+            domMap.delete(todo);
+        }
+
         const toDoDiv = document.createElement('div');
-        toDoDiv.classList.add(`todo-div-${todo.title}`);
+        toDoDiv.dataset.toDoId = todo.id;
+        toDoDiv.classList.add('incomplete-task');
+
         toDoDiv.innerHTML = `
         <h3>${todo.title}</h3>
         <p>${todo.dueDate}</p>
@@ -22,8 +31,9 @@ export const renderToDo = (project) => {
             <button class="expand-prop">expand</button>
             <button class="remove-todo" data-task-name="${todo.title}">Remove task</button>
         </div>`;
-        toDoDiv.classList.add('incomplete-task');
+
         todoContainer.appendChild(toDoDiv);
+        domMap.set(todo, toDoDiv);
     });
 
 

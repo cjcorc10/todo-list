@@ -20,10 +20,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // global array to hold projects
     const projectList = [];
+
+    // create map for project objecs and DOM objects
+    const domMap = new Map();
     const projectForm = document.getElementById('project-form');
 
     projectForm.addEventListener('submit', (event) => {
         handleAddProject(event);
+
     });
 
     // clear projects div & array
@@ -50,7 +54,6 @@ document.addEventListener('DOMContentLoaded', () => {
             handleRemoveProject(event);
         }
 
-
         // remove todo task from project
         if (event.target.classList.contains('remove-todo')) {
             handleRemoveToDo(event);
@@ -63,15 +66,16 @@ document.addEventListener('DOMContentLoaded', () => {
         // mark task as completed
         if (event.target.classList.contains('completed')) {
             // logic to get current project
-            currentProject = event.target.closest('[data-project-name]').dataset.projectName;
+            currentProject = getState(event);
             // logic to get current task
-            const currentTask = event.target.parentElement.previousElementSibling.previousElementSibling.textContent;
+            const taskId = event.target.closest('[data-to-do-id]').dataset.toDoId;
+            const taskIndex = currentProject.getList().findIndex((task) => task.id === taskId);
+            const currentTask = currentProject.getListItem(taskIndex);
             
-            // projectList[projectIndex].getList[taskIndex].markCompleted();
-            const proj = projectList.find((proj) => proj.name === currentProject);
-            const taskIndex = proj.getList().findIndex((task) => task.title === currentTask);
-            proj.getListItem(taskIndex).markComplete();
+            // Get task object and mark as complete
             
+            currentTask.markComplete();
+        
             handleToggleComplete(event);
         }
     });
@@ -88,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const newTask = createToDo(title, description, dueBy, priority);
         currentProject.addListItem(newTask);
 
-        renderToDo(currentProject);
+        renderToDo(currentProject, domMap);
         todoDialog.close();
         event.target.reset();
     });
@@ -101,8 +105,8 @@ document.addEventListener('DOMContentLoaded', () => {
     FUNCTION DECLARATIONS
     */
     function renderALL(projectList) {
-        renderProject(projectList);
-        projectList.forEach((proj) => renderToDo(proj));
+        renderProject(projectList, domMap);
+        projectList.forEach((proj) => renderToDo(proj, domMap));
     }
 
     function handleAddProject(event) {
@@ -120,11 +124,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // add todo objects to project list 
     function handleAddToDo(event) {
-        const projectName = event.target.dataset.projectName;
-    
-        // use find method to find the project to add the task to
-        currentProject = projectList.find((project) => project.name === projectName);
-    
+        currentProject = getState(event);
+
         if (currentProject) 
             todoDialog.showModal();
     }
@@ -132,26 +133,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function handleRemoveToDo(event) {
         const taskName = event.target.dataset.taskName;
-        const projectName = event.target.closest('[data-project-name]').dataset.projectName;
-        const project = projectList.find((proj) => proj.name === projectName);
+        currentProject = getState(event);
 
-        if (project) {
+        if (currentProject) {
             // remove the task from the project
-            project.removeListItem(taskName);
-        
+            currentProject.removeListItem(taskName);
+            
             // re-render project
-            renderToDo(project);
+            renderToDo(currentProject);
         }
     }
 
     function handleRemoveProject(event) {
-        const projectName = event.target.closest('[data-project-name]').dataset.projectName;
-        currentProject = projectList.findIndex((proj) => proj.name === projectName);
+        currentProject = getState(event);
         projectList.splice(currentProject, 1);
 
-        renderProject(projectList);
+        renderProject(projectList, domMap);
     }
 
-
+    function getState(event) {
+        const projectId = event.target.closest('[data-project-id]').dataset.projectId;
+        currentProject = projectList.find((proj) => proj.id === projectId);
+        return currentProject;
+    }
     
 });
