@@ -1,8 +1,32 @@
 body {
   margin: 0;
   padding: 0;
+  background-color: rgb(255, 235, 119);
 }
 
 header {
   text-align: center;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.project-buttons {
+  align-self: center;
+  display: flex;
+  gap: 1rem;
+}
+
+.project-buttons > button {
+  
+  background-color: rgb(250, 219, 46, .40);
+  border-radius: 20px;
+  border-width: .5px;
+  height: 4rem;
+  width: 8rem;
+
 }
