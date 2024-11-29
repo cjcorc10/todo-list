@@ -1,45 +1,94 @@
-body {
+/* RESET */
+* {
   margin: 0;
   padding: 0;
-  background-color: rgb(255, 235, 119);
+  box-sizing: border-box;
 }
+
+/* General Styling */
+body {
+  background-color: #f4f4f9;
+  font-family: Arial, sans-serif;
+}
+
 
 header {
   text-align: center;
+  background: rgb(19, 184, 184);
+  color: #fff;
+  padding: 1rem;
+}
+
+header > h1 {
+  font-size: 2rem;
 }
 
 .main-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   gap: 1rem;
+  padding: 1rem;
 }
 
 .project-buttons {
-  align-self: center;
+  justify-content: space-between;
   display: flex;
-  gap: 1rem;
 }
 
-.project-buttons > button {
+.project-buttons button {
+  border: none;
+  cursor: pointer;
+  background: rgb(19, 184, 184);
+  color: #fff;
+  font-size: 1rem;
+  border-radius: 3px;
+  padding: .5rem 1rem;
+  font-weight: bold;
+}
+
+#clear-projects {
+  background: rgb(199, 0, 0);
+}
+.project-buttons button:hover {
+  background: rgb(19, 145, 145)
+}
+
+dialog {
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 1rem;
+  width: 300px;
+}
+
+form {
+  display: grid;
   
-  background-color: rgb(250, 219, 46, .40);
-  border-radius: 20px;
-  border-width: .5px;
-  height: 8rem;
-  width: 8rem;
-  font-size: 22px;
 }
 
 #content {
+  padding: 2rem;
+
+}
+
+#todo-list {
   display: grid;
   padding: 4rem;
+  font-size: 16px;
   grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(auto-fill, minmax(10rem, auto));
   gap: 1rem;
 }
 
 .projects {
-  border: solid salmon;
+  font-size: 30px;
+  border: solid black;
   border-radius: 10px;
+  padding: 1rem;
+  text-align: center;
+}
+
+#my-dialog {
+  background-color: rgb(255, 255, 255, .9);
 
 }

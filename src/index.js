@@ -143,7 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const projectIndex = projectList.findIndex((proj) => proj.id === currentProject.id);
     projectList.splice(projectIndex, 1);
 
-    renderProject(projectList, domMap);
+    renderALL(projectList);
   }
 
   function getState(event) {

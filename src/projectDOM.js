@@ -21,20 +21,24 @@ export const renderProject = (projectList, domMap) => {
     const todoDiv = document.createElement("div");
     todoDiv.id = "todo-list";
 
+    const buttonDiv = document.createElement('div');
+    buttonDiv.classList.add('todo-buttons')
+
     // add todo button to rendered project
     const addToDoButton = document.createElement("button");
     addToDoButton.textContent = "Add todo";
     addToDoButton.classList.add("add-todo");
+    buttonDiv.appendChild(addToDoButton);
 
     // add remove project button
     const removeButton = document.createElement("button");
     removeButton.textContent = "remove project";
     removeButton.classList.add("remove-project");
+    buttonDiv.appendChild(removeButton);
 
     // set a projectName property on button to determine which add todo button was pressed.
     projectDiv.appendChild(todoDiv);
-    projectDiv.appendChild(addToDoButton);
-    projectDiv.appendChild(removeButton);
+    projectDiv.appendChild(buttonDiv);
     container.appendChild(projectDiv);
     domMap.set(project, projectDiv);
   });
