@@ -140,7 +140,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function handleRemoveProject(event) {
     currentProject = getState(event);
-    projectList.splice(currentProject, 1);
+    const projectIndex = projectList.findIndex((proj) => proj.id === currentProject.id);
+    projectList.splice(projectIndex, 1);
 
     renderProject(projectList, domMap);
   }

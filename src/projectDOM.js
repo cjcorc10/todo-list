@@ -3,7 +3,6 @@ export const renderProject = (projectList, domMap) => {
   const container = document.getElementById("content");
   clearProjects(container);
   projectList.forEach((project) => {
-    console.log("domthing");
     const existingNode = domMap.get(project);
     // update dom map for re-render
     if (existingNode) {
