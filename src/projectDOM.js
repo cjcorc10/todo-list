@@ -11,12 +11,13 @@ export const renderProject = (projectList, domMap) => {
     }
 
     const projectDiv = document.createElement("div");
-    projectDiv.textContent = project.name;
     projectDiv.classList.add("projects");
 
     // used to correlate todo with project
     projectDiv.dataset.projectId = project.id;
 
+    const title = document.createElement('h2');
+    title.textContent = project.name;
     // add div for todo list tasks
     const todoDiv = document.createElement("div");
     todoDiv.id = "todo-list";
@@ -26,17 +27,18 @@ export const renderProject = (projectList, domMap) => {
 
     // add todo button to rendered project
     const addToDoButton = document.createElement("button");
-    addToDoButton.textContent = "Add todo";
+    addToDoButton.textContent = "+";
     addToDoButton.classList.add("add-todo");
     buttonDiv.appendChild(addToDoButton);
 
     // add remove project button
     const removeButton = document.createElement("button");
-    removeButton.textContent = "remove project";
+    removeButton.textContent = "x";
     removeButton.classList.add("remove-project");
     buttonDiv.appendChild(removeButton);
 
     // set a projectName property on button to determine which add todo button was pressed.
+    projectDiv.appendChild(title);
     projectDiv.appendChild(todoDiv);
     projectDiv.appendChild(buttonDiv);
     container.appendChild(projectDiv);
