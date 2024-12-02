@@ -16,8 +16,10 @@ export const renderToDo = (project, domMap) => {
       domMap.delete(todo);
     }
 
+
     const toDoDiv = document.createElement("div");
     toDoDiv.dataset.toDoId = todo.id;
+    toDoDiv.classList.add("task-div");
     toDoDiv.classList.add("incomplete-task");
 
     toDoDiv.innerHTML = `

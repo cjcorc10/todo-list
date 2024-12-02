@@ -119,15 +119,18 @@ dialog {
 }
 
 #todo-list {
+  overflow-y: auto;
+}
+
+.task-div {
   display: grid;
   padding: .5rem;
-  max-height: 200px;
-  overflow-y: auto;
   border: 1px solid #ddd;
   background-color: #fff;
   border-radius: 5px;
   gap: .5rem;
 }
+
 
 .todo-row {
   padding: .5rem;
@@ -174,4 +177,12 @@ dialog {
 
 .remove-project:hover {
   background-color: rgb(148, 0, 0);
+}
+
+.incomplete-task {
+  background: rgb(255, 122, 122);
+}
+
+.complete-task {
+  background: rgb(131, 255, 131);
 }
