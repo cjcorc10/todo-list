@@ -25,14 +25,14 @@ export const renderToDo = (project, domMap) => {
     toDoDiv.innerHTML = `
         <div>
           <h3>${todo.title}</h3>
-          <p>${todo.dueDate}</p>
+          <p>due date: ${todo.dueDate}</p>
         </div>
         <div class="properties" style="display: none">
-            <p>description: ${todo.description}</p>
-            <p>priority: ${todo.priority}</p>
+            <p>${todo.description}</p>
+            <p>priority: <b>${todo.priority}</b></p>
         </div>
         <div class="todo-buttons">
-            <button class="expand-prop">expand</button>
+            <button class="expand-prop">view more</button>
             <button class="remove-todo" data-task-name="${todo.title}">Remove task</button>
         </div>
         <input type=checkbox class='completed'>`;

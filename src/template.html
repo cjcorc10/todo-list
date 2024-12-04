@@ -19,7 +19,7 @@
           <h2>New Project</h2>
           <div class="input-div">
             <label for="name">Name:</label>
-            <input type="text" name="name" id="project-name" />
+            <input type="text" name="name" id="project-name" required/>
           </div>
           <div class="project-buttons form-buttons">
             <button type="submit">create</button>
@@ -32,16 +32,16 @@
 
           <legend><h2>New Task</h2></legend>
           <label for="todo-title">Title:</label>
-          <input type="text" name="title" id="todo-title" />
+          <input type="text" name="title" id="todo-title" required/>
 
           <label for="todo-description">Description:</label>
-          <input type="text" name="description" id="todo-description" />
+          <input type="text" name="description" id="todo-description" required/>
 
           <label for="due-date">Due date:</label>
-          <input type="date" name="due-date" id="due-date" />
+          <input type="date" name="due-date" id="due-date" required/>
 
           <label for="priority">Priority Level 1-5:</label>
-          <input type="number" name="priority" id="priority" />
+          <input type="number" name="priority" id="priority" required/>
           <div class="project-buttons form-buttons">
             <button type="submit">add</button>
             <button type="button" id="cancel-todo">cancel</button>

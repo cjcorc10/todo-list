@@ -82,8 +82,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const title = document.getElementById("todo-title").value;
     const description = document.getElementById("todo-description").value;
     const dueBy = document.getElementById("due-date").value;
-    const priority = document.getElementById("priority").value;
-
+    const priorityInput = document.getElementById("priority");
+ 
+    // validate priority is between 1 and 5
+    const priority = parseInt(priorityInput.value, 10);
+    if (priority < 1 || priority > 5) {
+      alert("Priority must be between 1 and 5");
+      priorityInput.focus();
+      return;
+    }
+    
     const newTask = createToDo(title, description, dueBy, priority);
     currentProject.addListItem(newTask);
 
@@ -160,4 +168,5 @@ document.addEventListener("DOMContentLoaded", () => {
     const currentTask = currentProject.getListItem(taskId);
     return currentTask;
   }
+
 });

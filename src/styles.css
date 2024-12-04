@@ -192,14 +192,12 @@ dialog {
 .task-div {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: .8rem;
   border-radius: 8px;
-  margin-bottom: 15px;
   border: 1px solid #ccc;
   padding: 15px;
-  margin: 15px;
-  box-shadow: 0 2px 4px rbga(0, 0, 0, 0.1);
-
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  margin: 15px 15px 15px 50px;
 }
 
 .task-div h3 {
@@ -216,22 +214,21 @@ dialog {
 
 .task-div .completed {
   position: absolute;
-  left: 2px;
+  left: 20px;
   width: 20px;
   height: 20px;
   cursor: pointer;
   accent-color: #4caf50;
 }
 
-.task-div .properties {
+.task-div .properties p {
   padding: 10px;
   border-radius: 5px;
   font-size: 0.9rem;
-  color: #333;
-  display: none;
+  color: black;
 
 }
 
 .task-div {
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+
 }
