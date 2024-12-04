@@ -60,17 +60,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // mark task as completed
+
     if (event.target.classList.contains("completed")) {
       // logic to get current project
       currentProject = getState(event);
       // logic to get current task
       const taskId = event.target.closest("[data-to-do-id]").dataset.toDoId;
       const currentTask = currentProject.getListItem(taskId);
-
+      console.log(currentTask );
       // Get task object and mark as complete
 
       currentTask.markComplete();
-
       handleToggleComplete(event);
     }
   });

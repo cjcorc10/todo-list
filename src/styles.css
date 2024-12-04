@@ -53,11 +53,11 @@ button{
   font-size: .7rem;
 }
 
-#clear-projects, #close-button, .remove-project {
+#clear-projects, #close-button, #cancel-todo, .remove-project {
   background: rgb(255, 62, 62);
 }
 
-#clear-projects:hover, #close-button:hover {
+#clear-projects:hover,#cancel-todo:hover, #close-button:hover {
   background: rgb(148, 0, 0);
 }
 
@@ -72,8 +72,12 @@ dialog {
   width: 300px;
 }
 
+#todo-form > div, label {
+  margin-top: 10px;
+}
+
 /* DIALOG form style */
-#my-dialog {
+#my-dialog, #todo-dialog {
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 10px;
@@ -85,6 +89,11 @@ dialog {
   display: grid;
   gap: 1rem;
   grid-template-rows: auto auto auto;
+}
+
+#todo-form {
+  display: grid;
+  gap: .5rem;
 }
 
 .input-div {
@@ -122,14 +131,7 @@ dialog {
   overflow-y: auto;
 }
 
-.task-div {
-  display: grid;
-  padding: .5rem;
-  border: 1px solid #ddd;
-  background-color: #fff;
-  border-radius: 5px;
-  gap: .5rem;
-}
+
 
 
 .todo-row {
@@ -180,9 +182,56 @@ dialog {
 }
 
 .incomplete-task {
-  background: rgb(255, 122, 122);
+  background: rgb(255, 183, 183);
 }
 
 .complete-task {
-  background: rgb(131, 255, 131);
+  background: rgb(196, 255, 196);
+}
+
+.task-div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin: 15px;
+  box-shadow: 0 2px 4px rbga(0, 0, 0, 0.1);
+
+}
+
+.task-div h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.task-div p {
+  margin: 0;
+  font-size: .9rem;
+  color: #666;
+}
+
+.task-div .completed {
+  position: absolute;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: #4caf50;
+}
+
+.task-div .properties {
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  color: #333;
+  display: none;
+
+}
+
+.task-div {
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }

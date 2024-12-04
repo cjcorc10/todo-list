@@ -23,17 +23,19 @@ export const renderToDo = (project, domMap) => {
     toDoDiv.classList.add("incomplete-task");
 
     toDoDiv.innerHTML = `
-        <h3>${todo.title}</h3>
-        <p>${todo.dueDate}</p>
+        <div>
+          <h3>${todo.title}</h3>
+          <p>${todo.dueDate}</p>
+        </div>
         <div class="properties" style="display: none">
             <p>description: ${todo.description}</p>
             <p>priority: ${todo.priority}</p>
-            <button class='completed'>mark as complete</button>
         </div>
         <div class="todo-buttons">
             <button class="expand-prop">expand</button>
             <button class="remove-todo" data-task-name="${todo.title}">Remove task</button>
-        </div>`;
+        </div>
+        <input type=checkbox class='completed'>`;
 
     todoContainer.appendChild(toDoDiv);
     domMap.set(todo, toDoDiv);
@@ -51,11 +53,13 @@ export const toggleProps = (event) => {
 };
 
 export const handleToggleComplete = (event) => {
-  const parentDiv = event.target.parentElement.parentElement;
+  const parentDiv = event.target.parentElement;
 
   const isComplete = parentDiv.classList.toggle("incomplete-task");
   parentDiv.classList.toggle("complete-task", !isComplete);
-  event.target.textContent = !isComplete
+
+/*  event.target.textContent = !isComplete
     ? "mark as incomplete"
     : "mark as complete";
+  */
 };
