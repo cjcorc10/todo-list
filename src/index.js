@@ -5,6 +5,9 @@ import { renderProject, clearProjects } from "./projectDOM";
 import { renderToDo, toggleProps, handleToggleComplete } from "./todoDOM";
 
 document.addEventListener("DOMContentLoaded", () => {
+
+
+
   // project dialog DOM nodes
   const openDialog = document.getElementById("create-project");
   const dialog = document.getElementById("my-dialog");
@@ -119,6 +122,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const newProject = createProject(name);
     projectList.push(newProject);
+
+    
+    console.log(JSON.stringify(newProject));
+
 
     dialog.close();
     renderALL(projectList);
